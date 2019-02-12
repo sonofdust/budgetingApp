@@ -12,7 +12,7 @@ const AddExpensePage = () => <div>Add expence Component</div>;
 
 const EditExpensePage = () => <div>Edit expence Component</div>;
 const HelpPage = () => <div>Help Page</div>;
-const NotFoundPage = () => <div>404</div>;
+const NotFoundPage = () => <div>404xxxx</div>;
 
 const routes = (
   <BrowserRouter>
