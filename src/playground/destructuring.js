@@ -1,3 +1,7 @@
+//
+//Object destructuring
+//
+
 // const person = {
 //   name: "Nicholas",
 //   age: 23,
@@ -8,14 +12,14 @@
 // const { city, temp: temperature } = person.location;
 // console.log(`${name} is ${age} and lives in ${city}.  Temp is ${temperature}`);
 
-const book = {
-  title: "Ego is the enemy",
-  author: "Ryan Holiday",
-  publisher: {
-    name: "Penguine"
-  }
-};
+//
+//Object destructuring
+//
 
-const { title, author } = book;
-const { name: publisherName = "Self Published" } = book.publisher;
-console.log(publisherName);
+// const address = ["2342 W. 520 N.", "Lehi", "Ut", "84043"];
+// const [Street, City, State, Zip] = address;
+// console.log(`You are in ${Street} ${City} ${State}`);
+
+const item = ["Coffee (hot)", "$2.00", "$2.50", "$2.75"];
+const [coffee, , medium] = item;
+console.log(`A medium ${coffee} ${medium} `);

@@ -1,17 +1,33 @@
 import { createStore } from "redux";
 
+const incrementCount = ({ incrementBy = 1 } = {}) => ({
+  type: "INCREMENT",
+  incrementBy
+});
+
+const decrementCount = ({ decrementBy = 1 } = {}) => ({
+  type: "DECREMENT",
+  decrementBy
+});
+
+const setCount = ({ count } = {}) => ({
+  type: "SET",
+  count
+});
+
+const resetCount = ({ count = 0 } = {}) => ({
+  type: "RESET",
+  count
+});
+
 const store = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
     case "INCREMENT":
-      const incrementBy =
-        typeof action.incrementBy === "number" ? action.incrementBy : 1;
-      return { count: state.count + incrementBy };
+      return { count: state.count + action.incrementBy };
     case "DECREMENT":
-      const decrementBy =
-        typeof action.decrementBy === "number" ? action.decrementBy : 1;
-      return { count: state.count - decrementBy };
+      return { count: state.count - action.decrementBy };
     case "RESET":
-      return { count: 0 };
+      return { count: action.count };
     case "SET":
       return { count: action.count };
     default:
@@ -25,30 +41,18 @@ const unsubscribe = store.subscribe(() => {
 
 //  Actions - Object that gets send to the store.
 //  I'd like to increment the count.
-store.dispatch({
-  type: "INCREMENT",
-  incrementBy: 5
-});
-//unsubscribe();
-store.dispatch({
-  type: "INCREMENT"
-});
 
-//RESET - set the count equal to zero.
-store.dispatch({
-  type: "RESET"
-});
+store.dispatch(incrementCount({ incrementBy: 5 }));
 
-store.dispatch({
-  type: "DECREMENT"
-});
+store.dispatch(incrementCount());
 
-store.dispatch({
-  type: "DECREMENT",
-  decrementBy: 10
-});
+// store.dispatch({
+//   type: "RESET"
+// });
+store.dispatch(setCount({ count: -100 }));
 
-store.dispatch({
-  type: "SET",
-  count: 101
-});
+store.dispatch(decrementCount());
+
+store.dispatch(decrementCount({ decrementBy: 10 }));
+
+store.dispatch(resetCount());
