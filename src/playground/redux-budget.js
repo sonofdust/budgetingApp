@@ -9,7 +9,9 @@ import { createStore, combineReducers } from "redux";
 //  SET_START_DATE
 //  SET_END_DATE
 
+/********************************************************************************/
 //Expenses Reducer
+/********************************************************************************/
 const expensesReducerDefaultState = [];
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
   switch (action.type) {
@@ -17,8 +19,9 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
       return state;
   }
 };
-
-// Filter reducer.
+/********************************************************************************/
+//Filter Reducer
+/********************************************************************************/
 const filtersReducerDefaultState = {
   text: "",
   sortBy: "date",
@@ -32,7 +35,10 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
   }
 };
 
-//Store Creation
+/********************************************************************************/
+//Store Creating
+//Combine reducers/register reducers
+/********************************************************************************/
 const store = createStore(
   combineReducers({ expenses: expensesReducer, filters: filtersReducer })
 );
@@ -55,3 +61,6 @@ const demoState = {
     endDate: undefined
   }
 };
+
+// const user = { name: "Jen", age: 24 };
+// console.log({ ...user, age: 12, name: "Frankie" });
