@@ -94,6 +94,28 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
   }
 };
 
+// Get visible expenses
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses
+    .filter(expense => {
+      const startDateMatch =
+        typeof startDate !== "number" || expense.createdAt >= startDate;
+      const endDateMatch =
+        typeof endDate !== "number" || expense.createdAt <= endDate;
+      const textMatch = expense.description
+        .toLowerCase()
+        .includes(text.toLowerCase());
+      return startDateMatch && endDateMatch && textMatch;
+    })
+    .sort((a, b) => {
+      if ((sortBy = "date")) {
+        return a.createdAt < b.createdAt ? 1 : -1;
+      } else if ((sortBy = "amount")) {
+        return a.amount < b.amount ? 1 : -1;
+      }
+    });
+};
+
 /********************************************************************************/
 //Store Creating
 //Combine reducers/register reducers
@@ -103,19 +125,27 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  console.log(store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+//   console.log(visibleExpenses);
 });
 //********************************************************************************/
 //******************** TESTING REDUCERS AND METHODS ******************************/
 //********************************************************************************/
 // const expenseOne = store.dispatch(
-//   addExpense({ description: "rent", amount: 100, note: "I am iron man!!" })
+//   addExpense({
+//     description: "rent",
+//     amount: 10000,
+//     note: "I am iron man!!",
+//     createdAt: -1000
+//   })
 // );
 // const expenseTwo = store.dispatch(
 //   addExpense({
 //     description: "Coffee",
 //     amount: 500,
-//     note: "This is good coffee"
+//     note: "This is good coffee",
+//     createdAt: 1000
 //   })
 // );
 // const expenseThree = store.dispatch(
@@ -127,7 +157,7 @@ store.subscribe(() => {
 //   })
 // );
 
-// //store.dispatch(removeExpense({ id: expenseTwo.expense.id }));
+//store.dispatch(removeExpense({ id: expenseTwo.expense.id }));
 // store.dispatch(
 //   editExpense(expenseOne.expense.id, {
 //     description: "Iced Coffee",
@@ -139,9 +169,10 @@ store.subscribe(() => {
 
 // store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
-store.dispatch(setStartDate(123));
-store.dispatch(setStartDate());
-store.dispatch(setEndDate(1250));
+
+//store.dispatch(setStartDate(-2000));
+// store.dispatch(setStartDate());
+// store.dispatch(setEndDate(1250));
 
 //********************************************************************************/
 //********************************************************************************/
