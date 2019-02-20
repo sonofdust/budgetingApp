@@ -16,6 +16,4 @@ const mapStateToProps = state => {
   return { expenses: selectExpenses(state.expenses, state.filters) };
 };
 
-//const shit = (state.expenses).map(item=>(<div>item.description</div>));
-
 export default connect(mapStateToProps)(ExpenseList);
