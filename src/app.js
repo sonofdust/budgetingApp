@@ -22,14 +22,22 @@ store.dispatch(
 store.dispatch(
   addExpense({
     description: "Gas bill",
-    amount: 3200
+    amount: 3200,
+    createdAt: 1000
+  })
+);
+store.dispatch(
+  addExpense({
+    description: "Rent",
+    amount: 3200,
+    createdAt: 109500
   })
 );
 
-store.dispatch(setTextFilter("water"));
-setTimeout(() => {
-  store.dispatch(setTextFilter("bill"));
-}, 3000);
+// store.dispatch(setTextFilter("water"));
+// setTimeout(() => {
+//   store.dispatch(setTextFilter("bill"));
+// }, 3000);
 
 // const state = store.getState();
 // const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
