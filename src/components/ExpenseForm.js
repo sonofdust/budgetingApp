@@ -39,7 +39,6 @@ export default class ExpenseForm extends React.Component {
   onDateChage = createdAt => {
     if (createdAt) {
       this.setState(() => ({ createdAt }));
-      P;
     }
   };
 
